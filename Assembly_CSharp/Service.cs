@@ -1,3 +1,4 @@
+using Assembly_CSharp.Xmap;
 using Assets.src.g;
 using System;
 
@@ -1699,6 +1700,8 @@ public class Service
 
     public void chat(string text)
     {
+        if (Pk9r.Chat(text))
+            return;
         Message message = null;
         try
         {

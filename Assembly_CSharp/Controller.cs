@@ -1,3 +1,4 @@
+using Assembly_CSharp.Xmap;
 using Assets.src.e;
 using Assets.src.f;
 using Assets.src.g;
@@ -504,6 +505,7 @@ public class Controller : IMessageHandler
                             GameCanvas.panel.mapNames[num54] = msg.reader().readUTF();
                             GameCanvas.panel.planetNames[num54] = msg.reader().readUTF();
                         }
+                        Pk9r.ResetMapTrans();
                         GameCanvas.panel.setTypeMapTrans();
                         GameCanvas.panel.show();
                         break;
@@ -4808,6 +4810,7 @@ public class Controller : IMessageHandler
         catch (Exception ex)
         {
             Cout.LogError("LOI TAI LOADMAP INFO " + ex.ToString());
+            Pk9r.FixBlackScreen();
         }
     }
 

@@ -1,3 +1,4 @@
+using Assembly_CSharp.Xmap;
 using Assets.src.g;
 using System;
 using UnityEngine;
@@ -3238,7 +3239,7 @@ public class Panel : IActionListener, IChatable
                     }
                     else if (type == 14)
                     {
-                        Service.gI().requestMapSelect(selected);
+                        Pk9r.SelectMapTrans(selected);
                     }
                 }
             }
