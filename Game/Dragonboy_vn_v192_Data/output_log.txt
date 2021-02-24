@@ -81,3 +81,80 @@ Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 768.
 Total: 1.391100 ms (FindLiveObjects: 0.028800 ms CreateObjectMapping: 0.029300 ms MarkObjects: 1.330100 ms  DeleteObjects: 0.002200 ms)
 
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 800.
+Total: 1.553400 ms (FindLiveObjects: 0.036300 ms CreateObjectMapping: 0.029800 ms MarkObjects: 1.446800 ms  DeleteObjects: 0.039800 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 808.
+Total: 1.685000 ms (FindLiveObjects: 0.032200 ms CreateObjectMapping: 0.028000 ms MarkObjects: 1.612800 ms  DeleteObjects: 0.011500 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 135 unused Assets to reduce memory usage. Loaded Objects now: 841.
+Total: 1.972400 ms (FindLiveObjects: 0.060300 ms CreateObjectMapping: 0.066700 ms MarkObjects: 1.751200 ms  DeleteObjects: 0.093600 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 970.
+Total: 1.850900 ms (FindLiveObjects: 0.037200 ms CreateObjectMapping: 0.029700 ms MarkObjects: 1.768400 ms  DeleteObjects: 0.015200 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 970.
+Total: 1.482600 ms (FindLiveObjects: 0.046300 ms CreateObjectMapping: 0.028200 ms MarkObjects: 1.404800 ms  DeleteObjects: 0.002800 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 813.
+Total: 1.659200 ms (FindLiveObjects: 0.035300 ms CreateObjectMapping: 0.028500 ms MarkObjects: 1.583900 ms  DeleteObjects: 0.010900 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 140 unused Assets to reduce memory usage. Loaded Objects now: 973.
+Total: 1.823300 ms (FindLiveObjects: 0.046200 ms CreateObjectMapping: 0.045700 ms MarkObjects: 1.631700 ms  DeleteObjects: 0.099000 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 973.
+Total: 1.481300 ms (FindLiveObjects: 0.038000 ms CreateObjectMapping: 0.028800 ms MarkObjects: 1.411200 ms  DeleteObjects: 0.002700 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 973.
+Total: 1.594100 ms (FindLiveObjects: 0.043700 ms CreateObjectMapping: 0.030300 ms MarkObjects: 1.516700 ms  DeleteObjects: 0.003000 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 954.
+Total: 1.637500 ms (FindLiveObjects: 0.061500 ms CreateObjectMapping: 0.035400 ms MarkObjects: 1.521800 ms  DeleteObjects: 0.018300 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 985.
+Total: 1.576100 ms (FindLiveObjects: 0.048400 ms CreateObjectMapping: 0.031800 ms MarkObjects: 1.479200 ms  DeleteObjects: 0.015900 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 987.
+Total: 1.551200 ms (FindLiveObjects: 0.040600 ms CreateObjectMapping: 0.030700 ms MarkObjects: 1.476600 ms  DeleteObjects: 0.002800 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 987.
+Total: 1.890800 ms (FindLiveObjects: 0.046400 ms CreateObjectMapping: 0.031400 ms MarkObjects: 1.809400 ms  DeleteObjects: 0.003100 ms)
+
+APP QUIT
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+  at System.Net.Sockets.NetworkStream.Read (System.Byte[] buffer, Int32 offset, Int32 size) [0x00000] in <filename unknown>:0 
+  at System.IO.Stream.ReadByte () [0x00000] in <filename unknown>:0 
+  at System.IO.BinaryReader.ReadByte () [0x00000] in <filename unknown>:0 
+  at System.IO.BinaryReader.ReadSByte () [0x00000] in <filename unknown>:0 
+  at Session_ME+MessageCollector.readMessage () [0x00000] in <filename unknown>:0 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
