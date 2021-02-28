@@ -7,6 +7,7 @@ namespace Assembly_CSharp.Xmap
         public static bool IsMapTransAsXmap;
         public static bool IsUseCapsual = false;
         public static int IdMapCapsualReturn = -1;
+        public static bool IsShowPanelMapTrans = true;
 
         public static bool Chat(string text)
         {

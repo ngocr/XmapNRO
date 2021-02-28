@@ -8,7 +8,7 @@ namespace Assembly_CSharp.Xmap
     {
         private const int TIME_DELAY_NEXTMAP = 1000;
         private const int TIME_DELAY_RENEXTMAP = 500;
-        private const int PANEL_WAIT_DELAY = 100;
+        private const int INFO_MAP_TRANS_WAIT_DELAY = 100;
         private const int ID_ITEM_CAPSUAL_VIP = 194;
         private const int ID_ITEM_CAPSUAL = 193;
 
@@ -33,6 +33,7 @@ namespace Assembly_CSharp.Xmap
 
         public static void UseCapsual()
         {
+            Pk9r.IsShowPanelMapTrans = false;
             if (Algorithm.HasCapsualVip())
             {
                 Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL_VIP);
@@ -41,11 +42,11 @@ namespace Assembly_CSharp.Xmap
             Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL);
         }
 
-        public static void WaitPanelMapTrans()
+        public static void WaitInfoMapTrans()
         {
-            while (!GameCanvas.panel.isShow || Pk9r.IsMapTransAsXmap)
+            while (!Pk9r.IsShowPanelMapTrans)
             {
-                Thread.Sleep(PANEL_WAIT_DELAY);
+                Thread.Sleep(INFO_MAP_TRANS_WAIT_DELAY);
             }
         }
 

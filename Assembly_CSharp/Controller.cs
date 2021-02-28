@@ -506,8 +506,15 @@ public class Controller : IMessageHandler
                             GameCanvas.panel.planetNames[num54] = msg.reader().readUTF();
                         }
                         Pk9r.ResetMapTrans();
-                        GameCanvas.panel.setTypeMapTrans();
-                        GameCanvas.panel.show();
+                        if (Pk9r.IsShowPanelMapTrans)
+                        {
+                            GameCanvas.panel.setTypeMapTrans();
+                            GameCanvas.panel.show();
+                        }
+                        else
+                        {
+                            Pk9r.IsShowPanelMapTrans = true;
+                        }
                         break;
                     }
                 case -90:

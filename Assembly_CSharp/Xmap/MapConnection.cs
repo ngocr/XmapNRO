@@ -152,7 +152,7 @@ namespace Assembly_CSharp.Xmap
                 return;
 
             XmapController.UseCapsual();
-            XmapController.WaitPanelMapTrans();
+            XmapController.WaitInfoMapTrans();
 
             AddKeyLinkMaps(linkMaps, TileMap.mapID);
             string[] mapNames = GameCanvas.panel.mapNames;
