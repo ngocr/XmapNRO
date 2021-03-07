@@ -26,6 +26,7 @@ namespace Assembly_CSharp.Xmap
 
             XmapThread = new Thread(RunToMapId)
             {
+                Name = "Xmap",
                 IsBackground = true
             };
             XmapThread.Start(idMap);

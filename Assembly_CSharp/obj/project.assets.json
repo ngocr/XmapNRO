@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pk9r\\source\\nro\\XmapNRO\\Assembly_CSharp\\Assembly_CSharp.csproj",
+      "projectUniqueName": "C:\\Users\\pk9r\\source\\nro\\XmapNRO\\XmapNRO\\Assembly_CSharp\\Assembly_CSharp.csproj",
       "projectName": "Assembly-CSharp",
-      "projectPath": "C:\\Users\\pk9r\\source\\nro\\XmapNRO\\Assembly_CSharp\\Assembly_CSharp.csproj",
+      "projectPath": "C:\\Users\\pk9r\\source\\nro\\XmapNRO\\XmapNRO\\Assembly_CSharp\\Assembly_CSharp.csproj",
       "packagesPath": "C:\\Users\\pk9r\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pk9r\\source\\nro\\XmapNRO\\Assembly_CSharp\\obj\\",
+      "outputPath": "C:\\Users\\pk9r\\source\\nro\\XmapNRO\\XmapNRO\\Assembly_CSharp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pk9r\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,7 +45,7 @@
     "frameworks": {
       "net35": {
         "targetAlias": "net35",
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
