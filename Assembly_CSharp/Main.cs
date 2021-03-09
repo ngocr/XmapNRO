@@ -1,3 +1,4 @@
+using Assembly_CSharp.Xmap;
 using System.Net.NetworkInformation;
 using System.Threading;
 using UnityEngine;
@@ -284,6 +285,7 @@ public class Main : MonoBehaviour
             DataInputStream.update();
             SMS.update();
             Net.update();
+            Pk9r.Update();
             f++;
             if (f > 8)
             {

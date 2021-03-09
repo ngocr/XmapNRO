@@ -8,25 +8,14 @@ namespace Assembly_CSharp.Xmap
     public class MapConnection
     {
         public static List<GroupMap> GroupMaps = new List<GroupMap>();
+        public static LinkMaps MyLinkMaps;
+        public static bool IsLoading;
+        public static bool IsLoadingCapsual;
+        public static bool IsUsedCapsual;
 
-        public static LinkMaps GetLinkMaps()
+        public static void LoadLinkMaps()
         {
-            LinkMaps linkMaps = new LinkMaps();
-
-            LoadLinkMaps(linkMaps);
-
-            return linkMaps;
-        }
-
-        private static void LoadLinkMaps(LinkMaps linkMaps)
-        {
-            LoadLinkMapsFromFile(linkMaps, "TextData\\LinkMapsXmap.txt");
-            LoadLinkMapsAutoWaypointFromFile(linkMaps, "TextData\\AutoLinkMapsWaypoint.txt");
-
-            LoadLinkMapsHome(linkMaps);
-            LoadLinkMapSieuThi(linkMaps);
-
-            LoadLinkMapCapsual(linkMaps);
+            IsLoading = true;
         }
 
         public static void LoadGroupMapsFromFile(string path)
@@ -59,7 +48,7 @@ namespace Assembly_CSharp.Xmap
             RemoveMapsHomeInGroupMaps();
         }
 
-        private static void LoadLinkMapsFromFile(LinkMaps linkMaps, string path)
+        private static void LoadLinkMapsFromFile(string path)
         {
             try
             {
@@ -79,7 +68,7 @@ namespace Assembly_CSharp.Xmap
                     int[] info = new int[lenInfo];
                     Array.Copy(data, 3, info, 0, lenInfo);
 
-                    LoadLinkMap(linkMaps, data[0], data[1], (TypeMapNext)data[2], info);
+                    LoadLinkMap(data[0], data[1], (TypeMapNext)data[2], info);
                 }
             }
             catch (Exception e)
@@ -88,7 +77,7 @@ namespace Assembly_CSharp.Xmap
             }
         }
 
-        private static void LoadLinkMapsAutoWaypointFromFile(LinkMaps linkMaps, string path)
+        private static void LoadLinkMapsAutoWaypointFromFile(string path)
         {
             try
             {
@@ -107,10 +96,10 @@ namespace Assembly_CSharp.Xmap
                     for (int i = 0; i < data.Length; i++)
                     {
                         if (i != 0)
-                            LoadLinkMapAutoWaypoint(linkMaps, data[i], data[i - 1]);
+                            LoadLinkMapAutoWaypoint(data[i], data[i - 1]);
 
                         if (i != data.Length - 1)
-                            LoadLinkMapAutoWaypoint(linkMaps, data[i], data[i + 1]);
+                            LoadLinkMapAutoWaypoint(data[i], data[i + 1]);
                     }
                 }
             }
@@ -120,7 +109,7 @@ namespace Assembly_CSharp.Xmap
             }
         }
 
-        private static void LoadLinkMapsHome(LinkMaps linkMaps)
+        private static void LoadLinkMapsHome()
         {
             const int ID_MAP_LANG_BASE = 7;
             int cgender = Char.myCharz().cgender;
@@ -128,11 +117,11 @@ namespace Assembly_CSharp.Xmap
             int idMapHome = Algorithm.GetIdMapFromName("Về nhà");
             int idMapLang = ID_MAP_LANG_BASE * cgender;
 
-            LoadLinkMapAutoWaypoint(linkMaps, idMapLang, idMapHome);
-            LoadLinkMapAutoWaypoint(linkMaps, idMapHome, idMapLang);
+            LoadLinkMapAutoWaypoint(idMapLang, idMapHome);
+            LoadLinkMapAutoWaypoint(idMapHome, idMapLang);
         }
 
-        private static void LoadLinkMapSieuThi(LinkMaps linkMaps)
+        private static void LoadLinkMapSieuThi()
         {
             const int ID_MAP_SIEU_THI = 84;
             const int ID_NPC = 10;
@@ -143,18 +132,12 @@ namespace Assembly_CSharp.Xmap
             {
                 ID_NPC, INDEX
             };
-            LoadLinkMap(linkMaps, ID_MAP_SIEU_THI, idMapNext, TypeMapNext.NpcMenu, info);
+            LoadLinkMap(ID_MAP_SIEU_THI, idMapNext, TypeMapNext.NpcMenu, info);
         }
 
-        private static void LoadLinkMapCapsual(LinkMaps linkMaps)
+        private static void LoadLinkMapCapsual()
         {
-            if (!Algorithm.CanUseCapsual())
-                return;
-
-            XmapController.UseCapsual();
-            XmapController.WaitInfoMapTrans();
-
-            AddKeyLinkMaps(linkMaps, TileMap.mapID);
+            AddKeyLinkMaps(TileMap.mapID);
             string[] mapNames = GameCanvas.panel.mapNames;
 
             for (int select = 0; select < mapNames.Length; select++)
@@ -164,28 +147,28 @@ namespace Assembly_CSharp.Xmap
                 if (mapID != -1)
                 {
                     int[] info = GetInfoMapNextCapsual(select);
-                    linkMaps[TileMap.mapID].Add(new MapNext(mapID, TypeMapNext.Capsual, info));
+                    MyLinkMaps[TileMap.mapID].Add(new MapNext(mapID, TypeMapNext.Capsual, info));
                 }
             }
         }
 
-        private static void LoadLinkMap(LinkMaps linkMaps, int idMapStart, int idMapNext, TypeMapNext type, int[] info)
+        private static void LoadLinkMap(int idMapStart, int idMapNext, TypeMapNext type, int[] info)
         {
-            AddKeyLinkMaps(linkMaps, idMapStart);
+            AddKeyLinkMaps(idMapStart);
 
             MapNext mapNext = new MapNext(idMapNext, type, info);
-            linkMaps[idMapStart].Add(mapNext);
+            MyLinkMaps[idMapStart].Add(mapNext);
         }
 
-        private static void AddKeyLinkMaps(LinkMaps linkMaps, int idMap)
+        private static void AddKeyLinkMaps(int idMap)
         {
-            if (!linkMaps.ContainsKey(idMap))
-                linkMaps.Add(idMap, new List<MapNext>());
+            if (!MyLinkMaps.ContainsKey(idMap))
+                MyLinkMaps.Add(idMap, new List<MapNext>());
         }
 
-        private static void LoadLinkMapAutoWaypoint(LinkMaps linkMaps, int idMapStart, int idMapNext)
+        private static void LoadLinkMapAutoWaypoint(int idMapStart, int idMapNext)
         {
-            LoadLinkMap(linkMaps, idMapStart, idMapNext, TypeMapNext.AutoWaypoint, null);
+            LoadLinkMap(idMapStart, idMapNext, TypeMapNext.AutoWaypoint, null);
         }
 
         private static int[] GetInfoMapNextCapsual(int select)
@@ -214,6 +197,43 @@ namespace Assembly_CSharp.Xmap
                         break;
                 }
             }
+        }
+
+        public static void Update()
+        {
+            if (IsLoading)
+            {
+                if (!IsLoadingCapsual)
+                {
+                    MyLinkMaps = new LinkMaps();
+                    LoadLinkMapsFromFile("TextData\\LinkMapsXmap.txt");
+                    LoadLinkMapsAutoWaypointFromFile("TextData\\AutoLinkMapsWaypoint.txt");
+
+                    LoadLinkMapsHome();
+                    LoadLinkMapSieuThi();
+
+                    if (!Algorithm.CanUseCapsual())
+                    {
+                        FinishLoad();
+                        return;
+                    }
+                    XmapController.UseCapsual();
+                    IsLoadingCapsual = true;
+                    return;
+                }
+
+                if (!Pk9r.IsShowPanelMapTrans)
+                    return;
+
+                LoadLinkMapCapsual();
+                FinishLoad();
+            }
+        }
+
+        public static void FinishLoad()
+        {
+            IsLoadingCapsual = false;
+            IsLoading = false;
         }
     }
 }

@@ -53,7 +53,13 @@ namespace Assembly_CSharp.Xmap
                 return ID_MAP_TTVT_BASE + offset;
 
             if (mapName.Contains("Về chỗ cũ: "))
-                return Pk9r.IdMapCapsualReturn;
+            {
+                mapName = mapName.Replace("Về chỗ cũ: ", "");
+                if (TileMap.mapNames[Pk9r.IdMapCapsualReturn].Equals(mapName))
+                    return Pk9r.IdMapCapsualReturn;
+                if (mapName.Equals("Rừng đá"))
+                    return -1;
+            }
 
             for (int i = 0; i < TileMap.mapNames.Length; i++)
                 if (mapName.Equals(TileMap.mapNames[i]))

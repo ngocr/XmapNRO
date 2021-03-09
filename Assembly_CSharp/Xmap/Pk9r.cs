@@ -45,6 +45,12 @@ namespace Assembly_CSharp.Xmap
             return true;
         }
 
+        public static void Update()
+        {
+            MapConnection.Update();
+            XmapController.Update();
+        }
+
         public static bool XoaTauBay(Object obj)
         {
             Teleport teleport = (Teleport)obj;
@@ -76,10 +82,9 @@ namespace Assembly_CSharp.Xmap
             Service.gI().requestMapSelect(selected);
         }
 
-        public static void FixBlackScreen()
+        public static void FixBlackScreen(object controller)
         {
-            Service.gI().requestChangeZone(-1, -1);
-            GameScr.info1.addInfo("Fix Black Screen", 0);
+            ((Controller)controller).loadCurrMap(0);
         }
 
         public static void ResetMapTrans()

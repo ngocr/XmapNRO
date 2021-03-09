@@ -4817,7 +4817,8 @@ public class Controller : IMessageHandler
         catch (Exception ex)
         {
             Cout.LogError("LOI TAI LOADMAP INFO " + ex.ToString());
-            Pk9r.FixBlackScreen();
+            Pk9r.FixBlackScreen(this);
+            
         }
     }
 

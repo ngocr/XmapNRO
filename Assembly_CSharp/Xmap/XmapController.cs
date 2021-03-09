@@ -6,30 +6,26 @@ namespace Assembly_CSharp.Xmap
 {
     public class XmapController : IActionListener
     {
-        private const int TIME_DELAY_NEXTMAP = 1000;
+        private const int TIME_DELAY_NEXTMAP = 200;
         private const int TIME_DELAY_RENEXTMAP = 500;
-        private const int INFO_MAP_TRANS_WAIT_DELAY = 100;
         private const int ID_ITEM_CAPSUAL_VIP = 194;
         private const int ID_ITEM_CAPSUAL = 193;
 
-        private static Thread XmapThread;
         private static XmapController _Instance = new XmapController();
+        public static bool IsXmapRunning;
+        private static int IdMapEnd;
+        private static List<int> WayXmap;
+        private static int IndexWay;
+        private static bool IsNextMapFail;
+        private static bool IsWait;
+        private static long TimeStartWait;
+        private static long TimeWait;
+        private static bool IsWaitNextMap;
 
         public static void StartRunToMapId(int idMap)
         {
-            if (XmapThread != null)
-            {
-                if (XmapThread.IsAlive)
-                    GameScr.info1.addInfo("Xmap trước đó chưa kết thúc, đang ngắt luồng", 0);
-                XmapThread.Abort();
-            }
-
-            XmapThread = new Thread(RunToMapId)
-            {
-                Name = "Xmap",
-                IsBackground = true
-            };
-            XmapThread.Start(idMap);
+            IsXmapRunning = true;
+            IdMapEnd = idMap;
         }
 
         public static void UseCapsual()
@@ -41,14 +37,6 @@ namespace Assembly_CSharp.Xmap
                 return;
             }
             Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL);
-        }
-
-        public static void WaitInfoMapTrans()
-        {
-            while (!Pk9r.IsShowPanelMapTrans)
-            {
-                Thread.Sleep(INFO_MAP_TRANS_WAIT_DELAY);
-            }
         }
 
         public static void ShowXmapMenu()
@@ -83,57 +71,6 @@ namespace Assembly_CSharp.Xmap
         public static void HideInfoDlg()
         {
             InfoDlg.hide();
-        }
-
-        private static void RunToMapId(object idMap)
-        {
-            try
-            {
-                LinkMaps linkMaps = MapConnection.GetLinkMaps();
-                int idMapStart = TileMap.mapID;
-                int idMapEnd = (int)idMap;
-
-                List<int> way = Algorithm.FindWay(linkMaps, idMapStart, idMapEnd);
-
-                if (way == null)
-                {
-                    GameScr.info1.addInfo("Không thể tìm thấy đường đi", 0);
-                    return;
-                }
-
-                if (!RunWay(linkMaps, way))
-                {
-                    GameScr.info1.addInfo("Có lỗi xảy ra, đang thử lại", 0);
-                    RunToMapId(idMap);
-                    return;
-                }
-
-                GameScr.info1.addInfo("Xmap by Phucprotein", 0);
-            }
-            catch (Exception e)
-            {
-                GameScr.info1.addInfo(e.Message, 0);
-            }
-        }
-
-        private static bool RunWay(LinkMaps linkMaps, List<int> way)
-        {
-            for (int i = 0; i < way.Count - 1; i++)
-            {
-                while (TileMap.mapID == way[i])
-                {
-                    if (Algorithm.CanNextMap())
-                        NextMap(linkMaps, way[i + 1]);
-
-                    Thread.Sleep(TIME_DELAY_RENEXTMAP);
-                }
-                Thread.Sleep(TIME_DELAY_NEXTMAP);
-                if (TileMap.mapID != way[i + 1])
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
         private static void NextMap(LinkMaps linkMaps, int idMapNext)
@@ -262,6 +199,92 @@ namespace Assembly_CSharp.Xmap
                     ShowSelectMap(idMaps);
                     break;
             }
+        }
+
+        public static void Update()
+        {
+            if (IsXmapRunning)
+            {
+                if (IsWait)
+                {
+                    if (mSystem.currentTimeMillis() - TimeStartWait < TimeWait)
+                        return;
+                    IsWait = false;
+                }
+
+                if (MapConnection.IsLoading)
+                    return;
+
+                if (IsNextMapFail)
+                {
+                    WayXmap = null;
+                    MapConnection.MyLinkMaps = null;
+                    IsNextMapFail = false;
+                    return;
+                }
+
+                if (WayXmap == null)
+                {
+                    if (!MapConnection.IsLoading && MapConnection.MyLinkMaps == null)
+                    {
+                        MapConnection.LoadLinkMaps();
+                        return;
+                    }
+                    WayXmap = Algorithm.FindWay(MapConnection.MyLinkMaps, TileMap.mapID, IdMapEnd);
+                    IndexWay = 0;
+                    if (WayXmap == null)
+                    {
+                        GameScr.info1.addInfo("Không thể tìm thấy đường đi", 0);
+                        FinishXmap();
+                        return;
+                    }
+                }
+
+                if (IndexWay == WayXmap.Count - 1)
+                {
+                    GameScr.info1.addInfo("Xmap by Phucprotein", 0);
+                    FinishXmap();
+                    return;
+                }
+
+                if (TileMap.mapID == WayXmap[IndexWay])
+                {
+                    if (Algorithm.CanNextMap())
+                        NextMap(MapConnection.MyLinkMaps, WayXmap[IndexWay + 1]);
+                    Wait(TIME_DELAY_RENEXTMAP);
+                    IsWaitNextMap = true;
+                    return;
+                }
+
+                if (IsWaitNextMap)
+                {
+                    Wait(TIME_DELAY_NEXTMAP);
+                    IsWaitNextMap = false;
+                    return;
+                }
+                
+                if (TileMap.mapID != WayXmap[IndexWay + 1])
+                {
+                    GameScr.info1.addInfo("Có lỗi xảy ra, đang thử lại", 0);
+                    IsNextMapFail = true;
+                    return;
+                }
+                IndexWay++;
+            }
+        }
+
+        private static void Wait(int time)
+        {
+            IsWait = true;
+            TimeStartWait = mSystem.currentTimeMillis();
+            TimeWait = time;
+        }
+
+        private static void FinishXmap()
+        {
+            IsXmapRunning = false;
+            MapConnection.MyLinkMaps = null;
+            WayXmap = null;
         }
     }
 }
