@@ -169,6 +169,13 @@ namespace Assembly_CSharp.Xmap
 
         private static void MoveMyChar(int x, int y)
         {
+            if (ItemTime.isExistItem(4387))
+            {
+                Char.myCharz().cx = x;
+                Char.myCharz().cy = y;
+                Service.gI().charMove();
+                return;
+            }    
             Char.myCharz().cx = x;
             Char.myCharz().cy = y;
             Service.gI().charMove();
