@@ -47,8 +47,10 @@ namespace Assembly_CSharp.Xmap
 
         public static void Update()
         {
-            MapConnection.Update();
-            XmapController.Update();
+            if (MapConnection.IsLoading)
+                MapConnection.Update();
+            if (XmapController.IsXmapRunning)
+                XmapController.Update();
         }
 
         public static bool XoaTauBay(Object obj)
@@ -82,9 +84,10 @@ namespace Assembly_CSharp.Xmap
             Service.gI().requestMapSelect(selected);
         }
 
-        public static void FixBlackScreen(object controller)
+        public static void FixBlackScreen()
         {
-            ((Controller)controller).loadCurrMap(0);
+            Controller.gI().loadCurrMap(0);
+            Char.isLoadingMap = false;
         }
 
         public static void ResetMapTrans()

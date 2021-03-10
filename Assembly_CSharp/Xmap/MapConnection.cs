@@ -10,8 +10,8 @@ namespace Assembly_CSharp.Xmap
         public static List<GroupMap> GroupMaps = new List<GroupMap>();
         public static LinkMaps MyLinkMaps;
         public static bool IsLoading;
-        public static bool IsLoadingCapsual;
-        public static bool IsUsedCapsual;
+
+        private static bool IsLoadingCapsual;
 
         public static void LoadLinkMaps()
         {
@@ -46,6 +46,35 @@ namespace Assembly_CSharp.Xmap
             }
 
             RemoveMapsHomeInGroupMaps();
+        }
+
+        public static void Update()
+        {
+            if (!IsLoadingCapsual)
+            {
+                MyLinkMaps = new LinkMaps();
+                LoadLinkMapsFromFile("TextData\\LinkMapsXmap.txt");
+                LoadLinkMapsAutoWaypointFromFile("TextData\\AutoLinkMapsWaypoint.txt");
+
+                LoadLinkMapsHome();
+                LoadLinkMapSieuThi();
+
+                if (Algorithm.CanUseCapsual())
+                {
+                    XmapController.UseCapsual();
+                    IsLoadingCapsual = true;
+                    return;
+                }
+
+                IsLoading = false;
+                return;
+            }
+            if (IsWaitInfoMapTrans())
+                return;
+
+            LoadLinkMapCapsual();
+            IsLoadingCapsual = false;
+            IsLoading = false;
         }
 
         private static void LoadLinkMapsFromFile(string path)
@@ -96,10 +125,10 @@ namespace Assembly_CSharp.Xmap
                     for (int i = 0; i < data.Length; i++)
                     {
                         if (i != 0)
-                            LoadLinkMapAutoWaypoint(data[i], data[i - 1]);
+                            LoadLinkMap(data[i], data[i - 1], TypeMapNext.AutoWaypoint, null);
 
                         if (i != data.Length - 1)
-                            LoadLinkMapAutoWaypoint(data[i], data[i + 1]);
+                            LoadLinkMap(data[i], data[i + 1], TypeMapNext.AutoWaypoint, null);
                     }
                 }
             }
@@ -117,8 +146,8 @@ namespace Assembly_CSharp.Xmap
             int idMapHome = Algorithm.GetIdMapFromName("Về nhà");
             int idMapLang = ID_MAP_LANG_BASE * cgender;
 
-            LoadLinkMapAutoWaypoint(idMapLang, idMapHome);
-            LoadLinkMapAutoWaypoint(idMapHome, idMapLang);
+            LoadLinkMap(idMapLang, idMapHome, TypeMapNext.AutoWaypoint, null);
+            LoadLinkMap(idMapHome, idMapLang, TypeMapNext.AutoWaypoint, null);
         }
 
         private static void LoadLinkMapSieuThi()
@@ -139,14 +168,13 @@ namespace Assembly_CSharp.Xmap
         {
             AddKeyLinkMaps(TileMap.mapID);
             string[] mapNames = GameCanvas.panel.mapNames;
-
             for (int select = 0; select < mapNames.Length; select++)
             {
                 int mapID = Algorithm.GetIdMapFromName(mapNames[select]);
 
                 if (mapID != -1)
                 {
-                    int[] info = GetInfoMapNextCapsual(select);
+                    int[] info = new int[] { select };
                     MyLinkMaps[TileMap.mapID].Add(new MapNext(mapID, TypeMapNext.Capsual, info));
                 }
             }
@@ -166,14 +194,9 @@ namespace Assembly_CSharp.Xmap
                 MyLinkMaps.Add(idMap, new List<MapNext>());
         }
 
-        private static void LoadLinkMapAutoWaypoint(int idMapStart, int idMapNext)
+        private static bool IsWaitInfoMapTrans()
         {
-            LoadLinkMap(idMapStart, idMapNext, TypeMapNext.AutoWaypoint, null);
-        }
-
-        private static int[] GetInfoMapNextCapsual(int select)
-        {
-            return new int[] { select };
+            return !Pk9r.IsShowPanelMapTrans;
         }
 
         private static void RemoveMapsHomeInGroupMaps()
@@ -197,43 +220,6 @@ namespace Assembly_CSharp.Xmap
                         break;
                 }
             }
-        }
-
-        public static void Update()
-        {
-            if (IsLoading)
-            {
-                if (!IsLoadingCapsual)
-                {
-                    MyLinkMaps = new LinkMaps();
-                    LoadLinkMapsFromFile("TextData\\LinkMapsXmap.txt");
-                    LoadLinkMapsAutoWaypointFromFile("TextData\\AutoLinkMapsWaypoint.txt");
-
-                    LoadLinkMapsHome();
-                    LoadLinkMapSieuThi();
-
-                    if (!Algorithm.CanUseCapsual())
-                    {
-                        FinishLoad();
-                        return;
-                    }
-                    XmapController.UseCapsual();
-                    IsLoadingCapsual = true;
-                    return;
-                }
-
-                if (!Pk9r.IsShowPanelMapTrans)
-                    return;
-
-                LoadLinkMapCapsual();
-                FinishLoad();
-            }
-        }
-
-        public static void FinishLoad()
-        {
-            IsLoadingCapsual = false;
-            IsLoading = false;
         }
     }
 }

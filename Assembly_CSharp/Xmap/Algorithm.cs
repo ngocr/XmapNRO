@@ -11,11 +11,11 @@ namespace Assembly_CSharp.Xmap
         private const int ID_MAP_HOME_BASE = 21;
         private const int ID_MAP_TTVT_BASE = 24;
 
-        public static List<int> FindWay(LinkMaps linkMaps, int idMapStart, int idMapEnd)
+        public static List<int> FindWay(int idMapStart, int idMapEnd)
         {
             List<int> wayPassed = GetWayPassedStart(idMapStart);
 
-            List<int> way = FindWay(linkMaps, idMapEnd, wayPassed);
+            List<int> way = FindWay(idMapEnd, wayPassed);
             return way;
         }
 
@@ -32,14 +32,6 @@ namespace Assembly_CSharp.Xmap
                     return waypoint;
             }
             return null;
-        }
-
-        public static List<MapNext> GetMapNexts(LinkMaps linkMaps)
-        {
-            int idMap = TileMap.mapID;
-
-            List<MapNext> mapNexts = GetMapNexts(linkMaps, idMap);
-            return mapNexts;
         }
 
         public static int GetIdMapFromName(string mapName)
@@ -111,32 +103,32 @@ namespace Assembly_CSharp.Xmap
             return !Char.isLoadingMap && !Char.ischangingMap && !Controller.isStopReadMessage;
         }
 
-        private static List<int> FindWay(LinkMaps linkMaps, int idMapEnd, List<int> wayPassed)
+        private static List<int> FindWay(int idMapEnd, List<int> wayPassed)
         {
             int idMapLast = wayPassed.Last();
 
             if (IsWayPassedFinished(idMapEnd, idMapLast))
                 return wayPassed;
 
-            if (!CanGetMapNexts(linkMaps, idMapLast))
+            if (!CanGetMapNexts(idMapLast))
                 return null;
 
-            List<List<int>> ways = GetWays(linkMaps, idMapEnd, wayPassed);
+            List<List<int>> ways = GetWays(idMapEnd, wayPassed);
 
             List<int> bestWay = GetBestWay(ways);
             return bestWay;
         }
-        private static List<List<int>> GetWays(LinkMaps linkMaps, int idMapEnd, List<int> wayPassed)
+        private static List<List<int>> GetWays(int idMapEnd, List<int> wayPassed)
         {
             List<List<int>> ways = new List<List<int>>();
 
             int mapLast = wayPassed.Last();
-            List<MapNext> mapNexts = GetMapNexts(linkMaps, mapLast);
+            List<MapNext> mapNexts = GetMapNexts(mapLast);
 
             foreach (MapNext mapNext in mapNexts)
             {
                 int idMap = mapNext.MapID;
-                List<int> wayContinue = GetWayContinue(linkMaps, idMapEnd, wayPassed, idMap);
+                List<int> wayContinue = GetWayContinue(idMapEnd, wayPassed, idMap);
 
                 if (wayContinue != null)
                     ways.Add(wayContinue);
@@ -145,14 +137,14 @@ namespace Assembly_CSharp.Xmap
             return ways;
         }
 
-        private static List<int> GetWayContinue(LinkMaps linkMaps, int idMapEnd, List<int> wayPassed, int idMapNext)
+        private static List<int> GetWayContinue(int idMapEnd, List<int> wayPassed, int idMapNext)
         {
             if (IsPassed(idMapNext, wayPassed))
                 return null;
 
             List<int> wayPassedNext = GetWayPassedNext(wayPassed, idMapNext);
 
-            List<int> wayContinue = FindWay(linkMaps, idMapEnd, wayPassedNext);
+            List<int> wayContinue = FindWay(idMapEnd, wayPassedNext);
             return wayContinue;
         }
 
@@ -169,14 +161,13 @@ namespace Assembly_CSharp.Xmap
                     minStep = way.Count;
                 }
             }
-
             return bestWay;
         }
 
-        private static List<MapNext> GetMapNexts(LinkMaps linkMaps, int idMap)
+        public static List<MapNext> GetMapNexts(int idMap)
         {
-            if (CanGetMapNexts(linkMaps, idMap))
-                return linkMaps[idMap];
+            if (CanGetMapNexts(idMap))
+                return MapConnection.MyLinkMaps[idMap];
 
             return null;
         }
@@ -220,9 +211,9 @@ namespace Assembly_CSharp.Xmap
             return idMapLastWayPassed == idMapEnd;
         }
 
-        private static bool CanGetMapNexts(LinkMaps linkMaps, int idMap)
+        private static bool CanGetMapNexts(int idMap)
         {
-            return linkMaps.ContainsKey(idMap);
+            return MapConnection.MyLinkMaps.ContainsKey(idMap);
         }
 
         private static bool IsPassed(int idMap, List<int> wayPassed)
