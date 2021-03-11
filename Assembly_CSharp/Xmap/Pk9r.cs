@@ -45,6 +45,12 @@ namespace Assembly_CSharp.Xmap
             return true;
         }
 
+        public static void Info(string text)
+        {
+            if (text.Equals("Bạn chưa thể đến khu vực này"))
+                XmapController.FinishXmap();
+        }
+
         public static void Update()
         {
             if (MapConnection.IsLoading)

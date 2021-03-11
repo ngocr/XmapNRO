@@ -57,6 +57,14 @@ namespace Assembly_CSharp.Xmap
             IsXmapRunning = true;
         }
 
+        public static void FinishXmap()
+        {
+            IsXmapRunning = false;
+            IsNextMapFail = false;
+            MapConnection.MyLinkMaps = null;
+            WayXmap = null;
+        }
+
         public static void UseCapsual()
         {
             Pk9r.IsShowPanelMapTrans = false;
@@ -274,14 +282,6 @@ namespace Assembly_CSharp.Xmap
             if (IsWait && (mSystem.currentTimeMillis() - TimeStartWait >= TimeWait))
                 IsWait = false;
             return IsWait;
-        }
-
-        private static void FinishXmap()
-        {
-            IsXmapRunning = false;
-            IsNextMapFail = false;
-            MapConnection.MyLinkMaps = null;
-            WayXmap = null;
         }
 
         public void perform(int idAction, object p)

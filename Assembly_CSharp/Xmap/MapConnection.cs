@@ -52,12 +52,7 @@ namespace Assembly_CSharp.Xmap
         {
             if (!IsLoadingCapsual)
             {
-                MyLinkMaps = new LinkMaps();
-                LoadLinkMapsFromFile("TextData\\LinkMapsXmap.txt");
-                LoadLinkMapsAutoWaypointFromFile("TextData\\AutoLinkMapsWaypoint.txt");
-
-                LoadLinkMapsHome();
-                LoadLinkMapSieuThi();
+                LoadLinkMapBase();
 
                 if (Algorithm.CanUseCapsual())
                 {
@@ -75,6 +70,16 @@ namespace Assembly_CSharp.Xmap
             LoadLinkMapCapsual();
             IsLoadingCapsual = false;
             IsLoading = false;
+        }
+
+        private static void LoadLinkMapBase()
+        {
+            MyLinkMaps = new LinkMaps();
+            LoadLinkMapsFromFile("TextData\\LinkMapsXmap.txt");
+            LoadLinkMapsAutoWaypointFromFile("TextData\\AutoLinkMapsWaypoint.txt");
+
+            LoadLinkMapsHome();
+            LoadLinkMapSieuThi();
         }
 
         private static void LoadLinkMapsFromFile(string path)
