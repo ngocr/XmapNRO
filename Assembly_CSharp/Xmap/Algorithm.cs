@@ -82,25 +82,19 @@ namespace Assembly_CSharp.Xmap
             return waypoint.maxY;
         }
 
-        public static bool HasCapsualVip()
-        {
-            Item[] items = Char.myCharz().arrItemBag;
-
-            for (int i = 0; i < items.Length; i++)
-                if (IsCapsualVip(items[i]))
-                    return true;
-
-            return false;
-        }
-
         public static bool CanUseCapsual()
         {
-            return HasCapsualVip() || (Pk9r.IsUseCapsual && HasCapsual());
+            return !IsMyCharDie() && Pk9r.IsUseCapsual && HasCapsual();
         }
 
         public static bool CanNextMap()
         {
             return !Char.isLoadingMap && !Char.ischangingMap && !Controller.isStopReadMessage;
+        }
+
+        public static bool IsMyCharDie()
+        {
+            return Char.myCharz().statusMe == 14 || Char.myCharz().cHP <= 0;
         }
 
         private static List<int> FindWay(int idMapEnd, List<int> wayPassed)
@@ -255,18 +249,9 @@ namespace Assembly_CSharp.Xmap
             return false;
         }
 
-        private static bool IsCapsualVip(Item item)
-        {
-            if (item != null && item.template.id == ID_ITEM_CAPSUAL_VIP)
-                return true;
-            return false;
-        }
-
         private static bool IsCapsual(Item item)
         {
-            if (item != null && item.template.id == ID_ITEM_CAPSUAL)
-                return true;
-            return false;
+            return item != null && (item.template.id == ID_ITEM_CAPSUAL || item.template.id == ID_ITEM_CAPSUAL_VIP);
         }
     }
 }

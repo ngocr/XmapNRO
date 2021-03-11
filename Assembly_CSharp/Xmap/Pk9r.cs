@@ -25,7 +25,7 @@ namespace Assembly_CSharp.Xmap
                 else if (text.Equals("csb"))
                 {
                     IsUseCapsual = !IsUseCapsual;
-                    GameScr.info1.addInfo("Sử dụng capsual thường Xmap: " + (IsUseCapsual ? "Bật" : "Tắt"), 0);
+                    GameScr.info1.addInfo("Sử dụng capsual Xmap: " + (IsUseCapsual ? "Bật" : "Tắt"), 0);
                 }
                 else
                 {

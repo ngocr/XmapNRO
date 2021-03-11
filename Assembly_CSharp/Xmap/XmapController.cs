@@ -60,12 +60,8 @@ namespace Assembly_CSharp.Xmap
         public static void UseCapsual()
         {
             Pk9r.IsShowPanelMapTrans = false;
-            if (Algorithm.HasCapsualVip())
-            {
-                Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL_VIP);
-                return;
-            }
             Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL);
+            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL_VIP);
         }
 
         public static void HideInfoDlg()
@@ -113,7 +109,7 @@ namespace Assembly_CSharp.Xmap
                 }
             }
 
-            if (IndexWay == WayXmap.Count - 1)
+            if ((TileMap.mapID == WayXmap[WayXmap.Count - 1]) && !Algorithm.IsMyCharDie())
             {
                 GameScr.info1.addInfo("Xmap by Phucprotein", 0);
                 FinishXmap();
@@ -122,10 +118,17 @@ namespace Assembly_CSharp.Xmap
 
             if (TileMap.mapID == WayXmap[IndexWay])
             {
-                if (Algorithm.CanNextMap())
+                if (Algorithm.IsMyCharDie())
+                {
+                    Service.gI().returnTownFromDead();
+                    IsWaitNextMap = IsNextMapFail = true;                    
+                }
+                else if (Algorithm.CanNextMap())
+                {
                     NextMap(WayXmap[IndexWay + 1]);
+                    IsWaitNextMap = true;
+                }
                 Wait(TIME_DELAY_RENEXTMAP);
-                IsWaitNextMap = true;
                 return;
             }
 
@@ -135,7 +138,6 @@ namespace Assembly_CSharp.Xmap
                 return;
             }
 
-            GameScr.info1.addInfo("Có lỗi xảy ra, đang thử lại", 0);
             IsNextMapFail = true;
         }
 
