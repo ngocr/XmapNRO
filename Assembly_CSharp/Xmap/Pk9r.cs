@@ -94,6 +94,7 @@ namespace Assembly_CSharp.Xmap
         public static void FixBlackScreen()
         {
             Controller.gI().loadCurrMap(0);
+            Service.gI().finishLoadMap();
             Char.isLoadingMap = false;
         }
 
