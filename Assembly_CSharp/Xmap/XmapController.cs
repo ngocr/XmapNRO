@@ -77,6 +77,11 @@ namespace Assembly_CSharp.Xmap
             InfoDlg.hide();
         }
 
+        public static void SaveIdMapCapsualReturn()
+        {
+            Pk9r.IdMapCapsualReturn = TileMap.mapID;
+        }
+
         public static void Update()
         {
             if (IsWaiting())
@@ -230,7 +235,7 @@ namespace Assembly_CSharp.Xmap
 
         private static void NextMapCapsual(MapNext mapNext)
         {
-            Pk9r.SaveIdMapCapsualReturn();
+            SaveIdMapCapsualReturn();
             int index = mapNext.Info[0];
             Service.gI().requestMapSelect(index);
         }

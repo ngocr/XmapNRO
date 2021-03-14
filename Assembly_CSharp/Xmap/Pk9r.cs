@@ -87,7 +87,7 @@ namespace Assembly_CSharp.Xmap
                 XmapController.StartRunToMapId(idMap);
                 return;
             }
-            SaveIdMapCapsualReturn();
+            XmapController.SaveIdMapCapsualReturn();
             Service.gI().requestMapSelect(selected);
         }
 
@@ -101,11 +101,6 @@ namespace Assembly_CSharp.Xmap
         public static void ResetMapTrans()
         {
             IsMapTransAsXmap = false;
-        }
-
-        public static void SaveIdMapCapsualReturn()
-        {
-            IdMapCapsualReturn = TileMap.mapID;
         }
     }
 }

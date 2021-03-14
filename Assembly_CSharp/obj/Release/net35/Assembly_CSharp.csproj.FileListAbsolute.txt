@@ -10,3 +10,9 @@ C:\Users\pk9r\source\nro\XmapNRO\XmapNRO\Assembly_CSharp\obj\Release\net35\Assem
 C:\Users\pk9r\source\nro\XmapNRO\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly_CSharp.csproj.CoreCompileInputs.cache
 C:\Users\pk9r\source\nro\XmapNRO\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly_CSharp.csproj.CopyComplete
 C:\Users\pk9r\source\nro\XmapNRO\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly-CSharp.dll
+C:\Users\pk9r\Documents\GitHub\XmapNRO\Assembly_CSharp\bin\Release\net35\Assembly-CSharp.dll
+C:\Users\pk9r\Documents\GitHub\XmapNRO\Assembly_CSharp\bin\Release\net35\UnityEngine.dll
+C:\Users\pk9r\Documents\GitHub\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly_CSharp.csprojAssemblyReference.cache
+C:\Users\pk9r\Documents\GitHub\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly_CSharp.csproj.CoreCompileInputs.cache
+C:\Users\pk9r\Documents\GitHub\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly_CSharp.csproj.CopyComplete
+C:\Users\pk9r\Documents\GitHub\XmapNRO\Assembly_CSharp\obj\Release\net35\Assembly-CSharp.dll
