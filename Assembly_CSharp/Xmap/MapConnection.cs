@@ -157,11 +157,13 @@ namespace Assembly_CSharp.Xmap
 
         private static void LoadLinkMapSieuThi()
         {
+            const int ID_MAP_TTVT_BASE = 24;
             const int ID_MAP_SIEU_THI = 84;
             const int ID_NPC = 10;
             const int INDEX = 0;
 
-            int idMapNext = 24 + 0;
+            int offset = Char.myCharz().cgender;
+            int idMapNext = ID_MAP_TTVT_BASE + offset;
             int[] info = new int[]
             {
                 ID_NPC, INDEX
