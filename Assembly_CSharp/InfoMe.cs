@@ -302,7 +302,7 @@ public class InfoMe
 
     public void addInfo(string s, int Type)
     {
-        Pk9r.Info(s);
+        Pk9rXmap.Info(s);
         s = Res.changeString(s);
         if (info.infoWaitToShow.size() > 0 && s.Equals(((InfoItem)info.infoWaitToShow.lastElement()).s))
         {

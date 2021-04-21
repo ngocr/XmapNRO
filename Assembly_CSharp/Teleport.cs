@@ -173,7 +173,7 @@ public class Teleport
 
     public void update()
     {
-        if (Pk9r.XoaTauBay(this))
+        if (Pk9rXmap.XoaTauBay(this))
             return;
 
         if (planet > 2 && paintFire && y != -80)

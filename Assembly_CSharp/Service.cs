@@ -1700,7 +1700,7 @@ public class Service
 
     public void chat(string text)
     {
-        if (Pk9r.Chat(text))
+        if (Pk9rXmap.Chat(text))
             return;
         Message message = null;
         try

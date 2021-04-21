@@ -3239,7 +3239,7 @@ public class Panel : IActionListener, IChatable
                     }
                     else if (type == 14)
                     {
-                        Pk9r.SelectMapTrans(selected);
+                        Pk9rXmap.SelectMapTrans(selected);
                     }
                 }
             }

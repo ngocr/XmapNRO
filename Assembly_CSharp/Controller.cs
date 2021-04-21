@@ -505,15 +505,15 @@ public class Controller : IMessageHandler
                             GameCanvas.panel.mapNames[num54] = msg.reader().readUTF();
                             GameCanvas.panel.planetNames[num54] = msg.reader().readUTF();
                         }
-                        Pk9r.ResetMapTrans();
-                        if (Pk9r.IsShowPanelMapTrans)
+                        Pk9rXmap.ResetMapTrans();
+                        if (Pk9rXmap.IsShowPanelMapTrans)
                         {
                             GameCanvas.panel.setTypeMapTrans();
                             GameCanvas.panel.show();
                         }
                         else
                         {
-                            Pk9r.IsShowPanelMapTrans = true;
+                            Pk9rXmap.IsShowPanelMapTrans = true;
                         }
                         break;
                     }
@@ -4817,7 +4817,7 @@ public class Controller : IMessageHandler
         catch (Exception ex)
         {
             Cout.LogError("LOI TAI LOADMAP INFO " + ex.ToString());
-            Pk9r.FixBlackScreen();
+            Pk9rXmap.FixBlackScreen();
         }
     }
 

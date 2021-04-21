@@ -2,10 +2,6 @@
 
 namespace Assembly_CSharp.Xmap
 {
-    public class LinkMaps : Dictionary<int, List<MapNext>>
-    {
-    }
-
     public struct MapNext
     {
         public int MapID;

@@ -1,3 +1,4 @@
+using Assembly_CSharp.Xmap;
 using Assets.src.g;
 using System;
 
@@ -2660,6 +2661,7 @@ public class GameScr : mScreen, IChatable
                         {
                             ChatTextField.gI().startChat(this, string.Empty);
                         }
+                        else if (Pk9rXmap.HotKeys()) { }
                     }
                     else if (!GameCanvas.isMoveNumberPad)
                     {
