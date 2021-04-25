@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace Assembly_CSharp.Xmap
+namespace Assembly_CSharp.Mod.Xmap
 {
     public class Pk9rXmap
     {
-        public static bool IsXmapRunning;
-        public static bool IsMapTransAsXmap;
+        public static bool IsXmapRunning = false;
+        public static bool IsMapTransAsXmap = false;
+        public static bool IsShowPanelMapTrans = true;
         public static bool IsUseCapsual = false;
         public static int IdMapCapsualReturn = -1;
-
-        public static bool IsShowPanelMapTrans { get; set; } = true;
 
         public static bool Chat(string text)
         {
@@ -111,16 +110,23 @@ namespace Assembly_CSharp.Xmap
             Service.gI().requestMapSelect(selected);
         }
 
+        public static void ShowPanelMapTrans()
+        {
+            IsMapTransAsXmap = false;
+            if (IsShowPanelMapTrans)
+            {
+                GameCanvas.panel.setTypeMapTrans();
+                GameCanvas.panel.show();
+                return;
+            }
+            IsShowPanelMapTrans = true;
+        }
+
         public static void FixBlackScreen()
         {
             Controller.gI().loadCurrMap(0);
             Service.gI().finishLoadMap();
             Char.isLoadingMap = false;
-        }
-
-        public static void ResetMapTrans()
-        {
-            IsMapTransAsXmap = false;
         }
     }
 }

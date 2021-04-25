@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Assembly_CSharp.Xmap
+namespace Assembly_CSharp.Mod.Xmap
 {
     public class XmapAlgorithm
     {

@@ -1,4 +1,4 @@
-using Assembly_CSharp.Xmap;
+using Assembly_CSharp.Mod.Xmap;
 using Assets.src.e;
 using Assets.src.f;
 using Assets.src.g;
@@ -505,16 +505,7 @@ public class Controller : IMessageHandler
                             GameCanvas.panel.mapNames[num54] = msg.reader().readUTF();
                             GameCanvas.panel.planetNames[num54] = msg.reader().readUTF();
                         }
-                        Pk9rXmap.ResetMapTrans();
-                        if (Pk9rXmap.IsShowPanelMapTrans)
-                        {
-                            GameCanvas.panel.setTypeMapTrans();
-                            GameCanvas.panel.show();
-                        }
-                        else
-                        {
-                            Pk9rXmap.IsShowPanelMapTrans = true;
-                        }
+                        Pk9rXmap.ShowPanelMapTrans();
                         break;
                     }
                 case -90:

@@ -22,7 +22,7 @@
 		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)Game\Dragonboy_vn_v192_Data\Managed\&quot; /y&#xD;&#xA;mkdir &quot;$(SolutionDir)Game\TextData\&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Xmap\TextData\&quot; &quot;$(SolutionDir)Game\TextData\&quot; /y" />
+		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)Game\Dragonboy_vn_v192_Data\Managed\&quot; /y&#xD;&#xA;mkdir &quot;$(SolutionDir)Game\TextData\&quot;&#xD;&#xA;copy &quot;$(ProjectDir)Mod\Xmap\TextData\&quot; &quot;$(SolutionDir)Game\TextData\&quot; /y" />
 	</Target>
 	<ItemGroup>
 	  <Reference Include="UnityEngine">

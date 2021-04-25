@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 
-namespace Assembly_CSharp.Xmap
+namespace Assembly_CSharp.Mod.Xmap
 {
     public class XmapController : IActionListener
     {
@@ -63,7 +61,7 @@ namespace Assembly_CSharp.Xmap
                 }
             }
 
-            if ((TileMap.mapID == WayXmap[WayXmap.Count - 1]) && !XmapData.IsMyCharDie())
+            if (TileMap.mapID == WayXmap[WayXmap.Count - 1] && !XmapData.IsMyCharDie())
             {
                 GameScr.info1.addInfo("Xmap by Phucprotein", 0);
                 FinishXmap();
@@ -95,6 +93,17 @@ namespace Assembly_CSharp.Xmap
             IsNextMapFailed = true;
         }
 
+        public void perform(int idAction, object p)
+        {
+            switch (idAction)
+            {
+                case 1:
+                    List<int> idMaps = (List<int>)p;
+                    ShowPanelXmap(idMaps);
+                    break;
+            }
+        }
+
         private static void Wait(int time)
         {
             IsWait = true;
@@ -104,7 +113,7 @@ namespace Assembly_CSharp.Xmap
 
         private static bool IsWaiting()
         {
-            if (IsWait && (mSystem.currentTimeMillis() - TimeStartWait >= TimeWait))
+            if (IsWait && mSystem.currentTimeMillis() - TimeStartWait >= TimeWait)
                 IsWait = false;
             return IsWait;
         }
@@ -119,10 +128,9 @@ namespace Assembly_CSharp.Xmap
             GameCanvas.menu.startAt(myVector, 3);
         }
 
-        public static void ShowSelectMap(List<int> idMaps)
+        public static void ShowPanelXmap(List<int> idMaps)
         {
             Pk9rXmap.IsMapTransAsXmap = true;
-
             int len = idMaps.Count;
             GameCanvas.panel.mapNames = new string[len];
             GameCanvas.panel.planetNames = new string[len];
@@ -257,8 +265,6 @@ namespace Assembly_CSharp.Xmap
             InfoDlg.hide();
         }
 
-
-
         private static void MoveMyChar(int x, int y)
         {
             Char.myCharz().cx = x;
@@ -285,19 +291,6 @@ namespace Assembly_CSharp.Xmap
             }
             Service.gI().requestChangeMap();
         }
-
-
         #endregion
-
-        public void perform(int idAction, object p)
-        {
-            switch (idAction)
-            {
-                case 1:
-                    List<int> idMaps = (List<int>)p;
-                    ShowSelectMap(idMaps);
-                    break;
-            }
-        }
     }
 }

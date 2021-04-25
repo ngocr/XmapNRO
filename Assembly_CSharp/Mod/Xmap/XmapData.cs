@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Assembly_CSharp.Xmap
+namespace Assembly_CSharp.Mod.Xmap
 {
     public class XmapData
     {
