@@ -11,7 +11,7 @@ namespace Assembly_CSharp.Mod.Xmap
         private const int ID_MAP_HOME_BASE = 21;
         private const int ID_MAP_TTVT_BASE = 24;
         private const int ID_ITEM_CAPSUAL_VIP = 194;
-        private const int ID_ITEM_CAPSUAL = 193;
+        private const int ID_ITEM_CAPSUAL_NORMAL = 193;
         private const int ID_MAP_TPVGT = 19;
         private const int ID_MAP_TO_COLD = 109;
 
@@ -47,9 +47,15 @@ namespace Assembly_CSharp.Mod.Xmap
             if (!IsLoadingCapsual)
             {
                 LoadLinkMapBase();
-                if (CanUseCapsual())
+                if (CanUseCapsualVip())
                 {
-                    XmapController.UseCapsual();
+                    XmapController.UseCapsualVip();
+                    IsLoadingCapsual = true;
+                    return;
+                }
+                if (CanUseCapsualNormal())
+                {
+                    XmapController.UseCapsualNormal();
                     IsLoadingCapsual = true;
                     return;
                 }
@@ -364,25 +370,33 @@ namespace Assembly_CSharp.Mod.Xmap
             return stringBuilder.ToString().Trim();
         }
 
-        private static bool CanUseCapsual()
+        private static bool CanUseCapsualNormal()
         {
-            return !IsMyCharDie() && Pk9rXmap.IsUseCapsual && HasItemCapsual();
+            return !IsMyCharDie() && Pk9rXmap.IsUseCapsualNormal && HasItemCapsualNormal();
         }
 
-        private static bool HasItemCapsual()
+        private static bool HasItemCapsualNormal()
         {
             Item[] items = Char.myCharz().arrItemBag;
             for (int i = 0; i < items.Length; i++)
-                if (IsItemCapsual(items[i]))
+                if (items[i] != null && items[i].template.id == ID_ITEM_CAPSUAL_NORMAL)
                     return true;
             return false;
         }
 
-        private static bool IsItemCapsual(Item item)
+        private static bool CanUseCapsualVip()
         {
-            return item != null && (item.template.id == ID_ITEM_CAPSUAL || item.template.id == ID_ITEM_CAPSUAL_VIP);
+            return !IsMyCharDie() && Pk9rXmap.IsUseCapsualVip && HasItemCapsualVip();
         }
 
+        private static bool HasItemCapsualVip()
+        {
+            Item[] items = Char.myCharz().arrItemBag;
+            for (int i = 0; i < items.Length; i++)
+                if (items[i] != null && items[i].template.id == ID_ITEM_CAPSUAL_VIP)
+                    return true;
+            return false;
+        }
 
         #endregion
     }

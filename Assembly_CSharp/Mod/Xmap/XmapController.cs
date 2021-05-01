@@ -253,13 +253,18 @@ namespace Assembly_CSharp.Mod.Xmap
         #endregion
 
         #region Thao tác với game
-        public static void UseCapsual()
+        public static void UseCapsualNormal()
         {
             Pk9rXmap.IsShowPanelMapTrans = false;
             Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL);
-            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL_VIP);
         }
 
+        public static void UseCapsualVip()
+        {
+            Pk9rXmap.IsShowPanelMapTrans = false;
+            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL_VIP);
+        }
+        
         public static void HideInfoDlg()
         {
             InfoDlg.hide();

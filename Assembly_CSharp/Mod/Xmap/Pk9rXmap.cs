@@ -7,12 +7,13 @@ namespace Assembly_CSharp.Mod.Xmap
         public static bool IsXmapRunning = false;
         public static bool IsMapTransAsXmap = false;
         public static bool IsShowPanelMapTrans = true;
-        public static bool IsUseCapsual = false;
+        public static bool IsUseCapsualNormal = false;
+        public static bool IsUseCapsualVip = true;
         public static int IdMapCapsualReturn = -1;
 
         public static bool Chat(string text)
         {
-            if (text.Equals("xmp"))
+            if (text == "xmp")
             {
                 if (IsXmapRunning)
                 {
@@ -24,7 +25,7 @@ namespace Assembly_CSharp.Mod.Xmap
                     XmapController.ShowXmapMenu();
                 }
             }
-            else if (text.StartsWith("xmp"))
+            else if (IsGetInfoChat<int>(text, "xmp"))
             {
                 if (IsXmapRunning)
                 {
@@ -33,14 +34,19 @@ namespace Assembly_CSharp.Mod.Xmap
                 }
                 else
                 {
-                    int idMap = int.Parse(text.Substring(3));
+                    int idMap = GetInfoChat<int>(text, "xmp");
                     XmapController.StartRunToMapId(idMap);
                 }
             }
-            else if (text.Equals("csb"))
+            else if (text == "csb")
             {
-                IsUseCapsual = !IsUseCapsual;
-                GameScr.info1.addInfo("Sử dụng capsual Xmap: " + (IsUseCapsual ? "Bật" : "Tắt"), 0);
+                IsUseCapsualNormal = !IsUseCapsualNormal;
+                GameScr.info1.addInfo("Sử dụng capsual thường Xmap: " + (IsUseCapsualNormal ? "Bật" : "Tắt"), 0);
+            }
+            else if (text == "csdb")
+            {
+                IsUseCapsualVip = !IsUseCapsualVip;
+                GameScr.info1.addInfo("Sử dụng capsual đặc biệt Xmap: " + (IsUseCapsualVip ? "Bật" : "Tắt"), 0);
             }
             else
             {
@@ -128,5 +134,29 @@ namespace Assembly_CSharp.Mod.Xmap
             Service.gI().finishLoadMap();
             Char.isLoadingMap = false;
         }
+
+        #region Không cần liên kết với game
+        private static bool IsGetInfoChat<T>(string text, string s)
+        {
+            if (!text.StartsWith(s))
+            {
+                return false;
+            }
+            try
+            {
+                Convert.ChangeType(text.Substring(s.Length), typeof(T));
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private static T GetInfoChat<T>(string text, string s)
+        {
+            return (T)Convert.ChangeType(text.Substring(s.Length), typeof(T));
+        }
+        #endregion
     }
 }
