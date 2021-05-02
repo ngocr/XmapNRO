@@ -1,4 +1,4 @@
-using Assembly_CSharp.Mod.Xmap;
+using AssemblyCSharp.Mod.Xmap;
 
 public class InfoMe
 {

@@ -1,4 +1,4 @@
-using Assembly_CSharp.Mod.Xmap;
+using AssemblyCSharp.Mod.Xmap;
 using System.Net.NetworkInformation;
 using System.Threading;
 using UnityEngine;

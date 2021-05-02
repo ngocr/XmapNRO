@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Assembly_CSharp.Mod.Xmap
+namespace AssemblyCSharp.Mod.Xmap
 {
     public class XmapController : IActionListener
     {

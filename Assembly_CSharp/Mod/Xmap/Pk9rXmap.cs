@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assembly_CSharp.Mod.Xmap
+namespace AssemblyCSharp.Mod.Xmap
 {
     public class Pk9rXmap
     {
