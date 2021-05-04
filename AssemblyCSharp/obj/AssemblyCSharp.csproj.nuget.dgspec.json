@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\Assembly_CSharp\\AssemblyCSharp.csproj": {}
+    "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\AssemblyCSharp\\AssemblyCSharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\Assembly_CSharp\\AssemblyCSharp.csproj": {
+    "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\AssemblyCSharp\\AssemblyCSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\Assembly_CSharp\\AssemblyCSharp.csproj",
+        "projectUniqueName": "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\AssemblyCSharp\\AssemblyCSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\Assembly_CSharp\\AssemblyCSharp.csproj",
+        "projectPath": "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\AssemblyCSharp\\AssemblyCSharp.csproj",
         "packagesPath": "C:\\Users\\pk9r\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\Assembly_CSharp\\obj\\",
+        "outputPath": "C:\\Users\\pk9r\\Documents\\GitHub\\XmapNRO\\AssemblyCSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pk9r\\AppData\\Roaming\\NuGet\\NuGet.Config",
