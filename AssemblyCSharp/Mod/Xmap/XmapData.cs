@@ -18,14 +18,14 @@ namespace AssemblyCSharp.Mod.Xmap
         public List<GroupMap> GroupMaps;
         public Dictionary<int, List<MapNext>> MyLinkMaps;
         public bool IsLoading;
-        private bool IsLoadingCapsual;
+        private bool IsLoadingCapsule;
 
         private XmapData()
         {
             GroupMaps = new List<GroupMap>();
             MyLinkMaps = null;
             IsLoading = false;
-            IsLoadingCapsual = false;
+            IsLoadingCapsule = false;
         }
 
         private static XmapData _Instance;
@@ -44,19 +44,19 @@ namespace AssemblyCSharp.Mod.Xmap
 
         public void Update()
         {
-            if (!IsLoadingCapsual)
+            if (!IsLoadingCapsule)
             {
                 LoadLinkMapBase();
-                if (CanUseCapsualVip())
+                if (CanUseCapsuleVip())
                 {
-                    XmapController.UseCapsualVip();
-                    IsLoadingCapsual = true;
+                    XmapController.UseCapsuleVip();
+                    IsLoadingCapsule = true;
                     return;
                 }
-                if (CanUseCapsualNormal())
+                if (CanUseCapsuleNormal())
                 {
-                    XmapController.UseCapsualNormal();
-                    IsLoadingCapsual = true;
+                    XmapController.UseCapsuleNormal();
+                    IsLoadingCapsule = true;
                     return;
                 }
                 IsLoading = false;
@@ -64,8 +64,8 @@ namespace AssemblyCSharp.Mod.Xmap
             }
             if (IsWaitInfoMapTrans())
                 return;
-            LoadLinkMapCapsual();
-            IsLoadingCapsual = false;
+            LoadLinkMapCapsule();
+            IsLoadingCapsule = false;
             IsLoading = false;
         }
 
@@ -125,7 +125,7 @@ namespace AssemblyCSharp.Mod.Xmap
         #endregion
 
         #region Lấy dữ liệu cho xmap
-        private void LoadLinkMapCapsual()
+        private void LoadLinkMapCapsule()
         {
             AddKeyLinkMaps(TileMap.mapID);
             string[] mapNames = GameCanvas.panel.mapNames;
@@ -136,7 +136,7 @@ namespace AssemblyCSharp.Mod.Xmap
                 if (idMap != -1)
                 {
                     int[] info = new int[] { select };
-                    MyLinkMaps[TileMap.mapID].Add(new MapNext(idMap, TypeMapNext.Capsual, info));
+                    MyLinkMaps[TileMap.mapID].Add(new MapNext(idMap, TypeMapNext.Capsule, info));
                 }
             }
         }
@@ -346,8 +346,8 @@ namespace AssemblyCSharp.Mod.Xmap
             if (mapName.Contains("Về chỗ cũ: "))
             {
                 mapName = mapName.Replace("Về chỗ cũ: ", "");
-                if (TileMap.mapNames[Pk9rXmap.IdMapCapsualReturn].Equals(mapName))
-                    return Pk9rXmap.IdMapCapsualReturn;
+                if (TileMap.mapNames[Pk9rXmap.IdMapCapsuleReturn].Equals(mapName))
+                    return Pk9rXmap.IdMapCapsuleReturn;
                 if (mapName.Equals("Rừng đá"))
                     return -1;
             }
@@ -370,12 +370,12 @@ namespace AssemblyCSharp.Mod.Xmap
             return stringBuilder.ToString().Trim();
         }
 
-        private static bool CanUseCapsualNormal()
+        private static bool CanUseCapsuleNormal()
         {
-            return !IsMyCharDie() && Pk9rXmap.IsUseCapsualNormal && HasItemCapsualNormal();
+            return !IsMyCharDie() && Pk9rXmap.IsUseCapsuleNormal && HasItemCapsuleNormal();
         }
 
-        private static bool HasItemCapsualNormal()
+        private static bool HasItemCapsuleNormal()
         {
             Item[] items = Char.myCharz().arrItemBag;
             for (int i = 0; i < items.Length; i++)
@@ -384,12 +384,12 @@ namespace AssemblyCSharp.Mod.Xmap
             return false;
         }
 
-        private static bool CanUseCapsualVip()
+        private static bool CanUseCapsuleVip()
         {
-            return !IsMyCharDie() && Pk9rXmap.IsUseCapsualVip && HasItemCapsualVip();
+            return !IsMyCharDie() && Pk9rXmap.IsUseCapsuleVip && HasItemCapsuleVip();
         }
 
-        private static bool HasItemCapsualVip()
+        private static bool HasItemCapsuleVip()
         {
             Item[] items = Char.myCharz().arrItemBag;
             for (int i = 0; i < items.Length; i++)

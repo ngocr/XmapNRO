@@ -6,8 +6,8 @@ namespace AssemblyCSharp.Mod.Xmap
     {
         private const int TIME_DELAY_NEXTMAP = 200;
         private const int TIME_DELAY_RENEXTMAP = 500;
-        private const int ID_ITEM_CAPSUAL_VIP = 194;
-        private const int ID_ITEM_CAPSUAL = 193;
+        private const int ID_ITEM_CAPSULE_VIP = 194;
+        private const int ID_ITEM_CAPSULE = 193;
         private const int ID_ICON_ITEM_TDLT = 4387;
 
         private static readonly XmapController _Instance = new();
@@ -158,9 +158,9 @@ namespace AssemblyCSharp.Mod.Xmap
             WayXmap = null;
         }
 
-        public static void SaveIdMapCapsualReturn()
+        public static void SaveIdMapCapsuleReturn()
         {
-            Pk9rXmap.IdMapCapsualReturn = TileMap.mapID;
+            Pk9rXmap.IdMapCapsuleReturn = TileMap.mapID;
         }
 
         private static void NextMap(int idMapNext)
@@ -196,8 +196,8 @@ namespace AssemblyCSharp.Mod.Xmap
                 case TypeMapNext.Position:
                     NextMapPosition(mapNext);
                     break;
-                case TypeMapNext.Capsual:
-                    NextMapCapsual(mapNext);
+                case TypeMapNext.Capsule:
+                    NextMapCapsule(mapNext);
                     break;
             }
         }
@@ -244,25 +244,25 @@ namespace AssemblyCSharp.Mod.Xmap
             Service.gI().getMapOffline();
         }
 
-        private static void NextMapCapsual(MapNext mapNext)
+        private static void NextMapCapsule(MapNext mapNext)
         {
-            SaveIdMapCapsualReturn();
+            SaveIdMapCapsuleReturn();
             int index = mapNext.Info[0];
             Service.gI().requestMapSelect(index);
         }
         #endregion
 
         #region Thao tác với game
-        public static void UseCapsualNormal()
+        public static void UseCapsuleNormal()
         {
             Pk9rXmap.IsShowPanelMapTrans = false;
-            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL);
+            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSULE);
         }
 
-        public static void UseCapsualVip()
+        public static void UseCapsuleVip()
         {
             Pk9rXmap.IsShowPanelMapTrans = false;
-            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSUAL_VIP);
+            Service.gI().useItem(0, 1, -1, ID_ITEM_CAPSULE_VIP);
         }
         
         public static void HideInfoDlg()

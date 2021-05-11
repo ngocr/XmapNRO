@@ -37,6 +37,6 @@ namespace AssemblyCSharp.Mod.Xmap
         NpcMenu,
         NpcPanel,
         Position,
-        Capsual
+        Capsule
     }
 }

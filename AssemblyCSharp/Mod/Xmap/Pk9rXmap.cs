@@ -7,9 +7,9 @@ namespace AssemblyCSharp.Mod.Xmap
         public static bool IsXmapRunning = false;
         public static bool IsMapTransAsXmap = false;
         public static bool IsShowPanelMapTrans = true;
-        public static bool IsUseCapsualNormal = false;
-        public static bool IsUseCapsualVip = true;
-        public static int IdMapCapsualReturn = -1;
+        public static bool IsUseCapsuleNormal = false;
+        public static bool IsUseCapsuleVip = true;
+        public static int IdMapCapsuleReturn = -1;
 
         public static bool Chat(string text)
         {
@@ -40,13 +40,13 @@ namespace AssemblyCSharp.Mod.Xmap
             }
             else if (text == "csb")
             {
-                IsUseCapsualNormal = !IsUseCapsualNormal;
-                GameScr.info1.addInfo("Sử dụng capsual thường Xmap: " + (IsUseCapsualNormal ? "Bật" : "Tắt"), 0);
+                IsUseCapsuleNormal = !IsUseCapsuleNormal;
+                GameScr.info1.addInfo("Sử dụng capsule thường Xmap: " + (IsUseCapsuleNormal ? "Bật" : "Tắt"), 0);
             }
             else if (text == "csdb")
             {
-                IsUseCapsualVip = !IsUseCapsualVip;
-                GameScr.info1.addInfo("Sử dụng capsual đặc biệt Xmap: " + (IsUseCapsualVip ? "Bật" : "Tắt"), 0);
+                IsUseCapsuleVip = !IsUseCapsuleVip;
+                GameScr.info1.addInfo("Sử dụng capsule đặc biệt Xmap: " + (IsUseCapsuleVip ? "Bật" : "Tắt"), 0);
             }
             else
             {
@@ -112,7 +112,7 @@ namespace AssemblyCSharp.Mod.Xmap
                 XmapController.StartRunToMapId(idMap);
                 return;
             }
-            XmapController.SaveIdMapCapsualReturn();
+            XmapController.SaveIdMapCapsuleReturn();
             Service.gI().requestMapSelect(selected);
         }
 
