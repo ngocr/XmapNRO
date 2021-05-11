@@ -10,8 +10,8 @@ namespace AssemblyCSharp.Mod.Xmap
     {
         private const int ID_MAP_HOME_BASE = 21;
         private const int ID_MAP_TTVT_BASE = 24;
-        private const int ID_ITEM_CAPSUAL_VIP = 194;
-        private const int ID_ITEM_CAPSUAL_NORMAL = 193;
+        private const int ID_ITEM_CAPSULE_VIP = 194;
+        private const int ID_ITEM_CAPSULE_NORMAL = 193;
         private const int ID_MAP_TPVGT = 19;
         private const int ID_MAP_TO_COLD = 109;
 
@@ -379,7 +379,7 @@ namespace AssemblyCSharp.Mod.Xmap
         {
             Item[] items = Char.myCharz().arrItemBag;
             for (int i = 0; i < items.Length; i++)
-                if (items[i] != null && items[i].template.id == ID_ITEM_CAPSUAL_NORMAL)
+                if (items[i] != null && items[i].template.id == ID_ITEM_CAPSULE_NORMAL)
                     return true;
             return false;
         }
@@ -393,7 +393,7 @@ namespace AssemblyCSharp.Mod.Xmap
         {
             Item[] items = Char.myCharz().arrItemBag;
             for (int i = 0; i < items.Length; i++)
-                if (items[i] != null && items[i].template.id == ID_ITEM_CAPSUAL_VIP)
+                if (items[i] != null && items[i].template.id == ID_ITEM_CAPSULE_VIP)
                     return true;
             return false;
         }
