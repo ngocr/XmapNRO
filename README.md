@@ -3,7 +3,7 @@ Hỗ trợ đi chuyển qua lại nhanh giữa các map trong NRO server Việt 
 Nếu các bạn có sử dụng source của mình để làm bản mod khác mình hi vọng có đề cập tới mình trong chức năng này.
 
 Hướng dẫn cài đặt: https://youtu.be/enF9qWPoW44 (đã bị xóa)
-Hướng dẫn cài đặt theo link này: https://www.youtube.com/watch?v=K0upgH8bVBU
+\nHướng dẫn cài đặt theo link này: https://www.youtube.com/watch?v=K0upgH8bVBU
 
 
 ## Lệnh chat
